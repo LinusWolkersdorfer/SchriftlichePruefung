@@ -7,6 +7,9 @@ const PORT = 5000;
 // Middleware für JSON-Daten
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+
 // Verbindung zur SQLite-Datenbank herstellen
 const db = new sqlite3.Database('database.db', (err) => {
     if (err) {
@@ -75,6 +78,57 @@ app.post('/api/evaluate', (req, res) => {
         });
     });
 });
+
+const multer = require("multer");
+const fs = require("fs");
+const csvParser = require("csv-parser");
+
+// Multer für den Datei-Upload konfigurieren
+const upload = multer({ dest: "uploads/" });
+
+// API-Route zum Hochladen und Verarbeiten der CSV-Datei
+app.post("/api/upload", upload.single("csv"), (req, res) => {
+    // Überprüfe, ob die Datei vorhanden ist
+    if (!req.file) {
+        console.error("Keine Datei hochgeladen!");
+        return res.status(400).json({ error: "Keine Datei hochgeladen." });
+    }
+    
+    const filePath = req.file.path;
+
+    // CSV-Daten einlesen und in die Datenbank einfügen
+    const questions = [];
+    fs.createReadStream(filePath)
+        .pipe(csvParser())
+        .on("data", (row) => {
+            const { question, category, option1, option2, option3, correctOption } = row;
+            questions.push([question, category, option1, option2, option3, parseInt(correctOption)]);
+        })
+        .on("end", () => {
+            // Fragen in die Datenbank einfügen
+            const sql = `
+                INSERT INTO questions (question, category, option1, option2, option3, correctOption)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `;
+            questions.forEach((q) => {
+                db.run(sql, q, (err) => {
+                    if (err) {
+                        console.error("Fehler beim Einfügen der Frage:", err.message);
+                    }
+                });
+            });
+
+            // Temporäre Datei löschen
+            fs.unlinkSync(filePath);
+
+            res.status(200).json({ message: "CSV-Datei erfolgreich verarbeitet!" });
+        })
+        .on("error", (error) => {
+            console.error("Fehler beim Verarbeiten der CSV-Datei:", error);
+            res.status(500).json({ error: "Fehler beim Verarbeiten der Datei." });
+        });
+});
+
 
 // Server starten
 app.listen(PORT, () => {
