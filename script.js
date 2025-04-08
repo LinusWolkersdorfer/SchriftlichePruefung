@@ -1,6 +1,14 @@
 let allQuestions = [];
 let questions = [];
 
+// Fehlerzählung pro Kategorie
+let categoryErrors = {
+    "Recht": 0,
+    "Jagdbetrieb, Hege und Brauchtum": 0,
+    "Waffenkunde, Waffenrecht": 0,
+    "Wildarten, Wildschutz, Landnutzung, Schadensverhütung": 0
+};
+
 const CATEGORIES = [
     "Recht",
     "Jagdbetrieb, Hege und Brauchtum",
@@ -43,6 +51,12 @@ let score = 0;
 function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
+
+    // Fehlerzählung zurücksetzen
+    CATEGORIES.forEach(category => {
+        categoryErrors[category] = 0;
+    });
+
     nextButton.innerHTML = "Next";
     showQuestion();
 }
@@ -75,13 +89,16 @@ function resetState() {
 function selectAnswer(e) {
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
-    
+    const currentQuestion = questions[currentQuestionIndex];
+
     if (highlightToggle.checked) {  // Nur markieren, wenn der Schalter aktiv ist
         if (isCorrect) {
             selectedBtn.classList.add("correct");
             score++;
         } else {
             selectedBtn.classList.add("incorrect");
+            // Fehler pro Kategorie zählen
+            categoryErrors[currentQuestion.category]++;
         }
 
         // Alle anderen Buttons deaktivieren
@@ -103,6 +120,15 @@ function selectAnswer(e) {
 function showScore() {
     resetState();
     questionElement.innerHTML = `Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+    
+    // Fehler pro Kategorie anzeigen
+    let categoryErrorsText = "<br>Fehler pro Kategorie:<br>";
+    CATEGORIES.forEach(category => {
+        categoryErrorsText += `${category}: ${categoryErrors[category]} Fehler<br>`;
+    });
+
+    questionElement.innerHTML += categoryErrorsText;
+
     nextButton.innerHTML = "Erneut starten";
     nextButton.style.display = "block";
 }
