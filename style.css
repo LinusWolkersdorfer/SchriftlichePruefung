@@ -82,6 +82,14 @@ button.incorrect {
     background: #6b1414;
 }
 
+button.correctHidden {
+    background: #333;
+}
+
+button.incorrectHidden {
+    background: #333;
+}
+
 /* Schalter Styling */
 #highlight-toggle {
     margin-top: 20px;

@@ -47,6 +47,7 @@ const highlightToggle = document.getElementById("highlight-toggle"); // Der Scha
 
 let currentQuestionIndex = 0;
 let score = 0;
+let wrongAnswerIds = [];
 
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -58,6 +59,7 @@ function startQuiz() {
     });
 
     nextButton.innerHTML = "Next";
+    wrongAnswerIds = [];
     showQuestion();
 }
 
@@ -91,36 +93,49 @@ function selectAnswer(e) {
     const isCorrect = selectedBtn.dataset.correct === "true";
     const currentQuestion = questions[currentQuestionIndex];
 
-    if (highlightToggle.checked) {  // Nur markieren, wenn der Schalter aktiv ist
-        if (isCorrect) {
+    if (isCorrect) {
+        if (highlightToggle.checked) {
             selectedBtn.classList.add("correct");
-            score++;
-        } else {
-            selectedBtn.classList.add("incorrect");
-            // Fehler pro Kategorie zählen
-            categoryErrors[currentQuestion.category]++;
+        }else{
+            selectedBtn.classList.add("correctHidden");
         }
-
-        // Alle anderen Buttons deaktivieren
-        Array.from(answerButtons.children).forEach(button => {
-            if (button.dataset.correct === "true") {
-                button.classList.add("correct");
-            }
-            button.disabled = true;
-        });
+        score++;
     } else {
-        // Wenn der Schalter deaktiviert ist, nur die Auswahl des Buttons
-        selectedBtn.disabled = true;
-        nextButton.style.display = "block";
+        if (highlightToggle.checked) {
+            selectedBtn.classList.add("incorrect");
+        }else{
+            selectedBtn.classList.add("incorrectHidden");
+        }
+        // Fehler pro Kategorie zählen
+        categoryErrors[currentQuestion.category]++;
+        wrongAnswerIds.push(questions[currentQuestionIndex].id);
     }
+
+    // Alle anderen Buttons deaktivieren
+    Array.from(answerButtons.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+            if (highlightToggle.checked) {
+                button.classList.add("correct");
+            }else{
+                button.classList.add("correctHidden");
+            }
+        }
+        button.disabled = true;
+    });
     
     nextButton.style.display = "block";
 }
 
 function showScore() {
     resetState();
-    questionElement.innerHTML = `Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
-    
+    let resultText = `Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+
+    if (wrongAnswerIds.length > 0) {
+        resultText += `<br><br>Falsch beantwortete Fragen (IDs):<br>${wrongAnswerIds.join(', ')}`;
+    }
+
+    questionElement.innerHTML = resultText;
+
     // Fehler pro Kategorie anzeigen
     let categoryErrorsText = "<br>Fehler pro Kategorie:<br>";
     CATEGORIES.forEach(category => {
