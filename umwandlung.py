@@ -12,6 +12,7 @@ def convert_to_json(input_file, output_file):
         fragen_liste = []
         for row in reader:
             frage = {
+                "id": row["ID"],
                 "question": row["Frage"],
                 "category": row["Sachgebiet"],
                 "answers": [
