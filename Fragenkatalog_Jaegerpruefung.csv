@@ -520,7 +520,7 @@ ID,Sachgebiet,Frage,Antwort Nr. 1,Antwort Nr. 2,Antwort Nr. 3,Richtige Antwort =
 898,Recht,Welche Vogelart zählt nach dem Bundesartenschutzverordnung zu den streng geschützten Arten?,Rebhuhn,Auerwild,Fasan,2
 900,Recht,Welches in ihrem Jagdbezirk tot aufgefundene Tier dürfen Sie sich nicht ohne Weiteres aneignen und präparieren lassen?,Feldsperling,Waldschnepfe,Blässralle,1
 901,Recht,Sie finden ein vom Sturm heruntergewehtes Habichtnest mit einem Nestling. Können Sie diesen an einen bekannten Falkner ohne Weiteres zur Abrichtung abgeben?,Nein.,Ja.,"Ja, aber nur mit Zustimmung des örtlichen Naturschutzverbandes.",1
-902,Recht,Was müssen Sie grundsätzlich bei der Jagdausübung in Naturschutzgebieten beachten?,Die einschlägigen Vorschriften in der Naturschutzgebietsveror dnung.,Nichts,Die Pirsch ist in Naturschutzgebieten verboten.,1
+902,Recht,Was müssen Sie grundsätzlich bei der Jagdausübung in Naturschutzgebieten beachten?,Die einschlägigen Vorschriften in der Naturschutzgebietsverordnung.,Nichts,Die Pirsch ist in Naturschutzgebieten verboten.,1
 903,Recht,"Sie finden in ihrem Jagdbezirk einen flugunfähigen, abgemagerten Mäusebussard. Dürfen Sie ihn töten, um dem Tier weiteres Leiden zu ersparen?",Nein.,Ja.,"Ja, aber nur weidgerecht.",1
 904,Recht,Welche dem Jagdrecht unterliegende Art ist naturschutzrechtlich nicht streng geschützt?,Feldhase.,Luchs.,Wildkatze.,1
 905,Recht,Welche Aussage zum geschützten Biotop ist richtig?,Dieses besteht kraft Gesetzes und ohne eigene Rechtsverordnung.,Dieses wird per Rechtsverordnung ausgewiesen.,Es handelt sich um einen wertvollen Verbund abgrenzbarer Lebensräume.,1
@@ -828,7 +828,7 @@ ID,Sachgebiet,Frage,Antwort Nr. 1,Antwort Nr. 2,Antwort Nr. 3,Richtige Antwort =
 150,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Was ist Prossholz?,Junge Kiefernzweige,Gipfel frisch gefällter Fichten,Abgeschnittene Zweige von Laubgehölzen als Winteräsung für Wild,3
 151,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Bäume sind für die Prossholzgewinnung besonders geeignet?,Rosskastanie,Moorbirke,Obstbäume,3
 152,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Strauchart ist im Winter wichtige Äsungspflanze für Rehwild?,Himbeere,Vogelbeere,Brombeere,3
-153,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Wildackerpflanze bietet Blattund Knollenäsung?,Waldstaudenroggen,Topinambur,Süßlupine,2
+153,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Wildackerpflanze bietet Blatt- und Knollenäsung?,Waldstaudenroggen,Topinambur,Süßlupine,2
 154,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Pflanze bietet auf dem Wildacker auch noch im Winter bei längeren Frostperioden saftige Grünäsung?,Markstammkohl,Sonnenblumen,Buchweizen,1
 156,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Strauchart ist nicht zur Anlage von Hecken geeignet?,Weißdorn,Schwarzdorn,Stechpalme,3
 157,"Wildarten, Wildschutz, Landnutzung, Schadensverhütung",Welche Pflanze ist mehrjährig und damit als Daueräsungsfläche geeignet?,Ackerbohne,Buchweizen,Perserklee,2
